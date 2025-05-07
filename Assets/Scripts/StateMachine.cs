@@ -14,5 +14,6 @@ public class StateMachine
     }
     public void Update() => currentState?.Update(entity);
     public void FixedUpdate() => currentState?.FixedUpdate(entity);
+    public IState CurrentState => currentState;
 
 }

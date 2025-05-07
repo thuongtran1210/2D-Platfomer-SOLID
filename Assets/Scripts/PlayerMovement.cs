@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IMovement, IJump
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 10f;
     private Rigidbody2D rb;
     private bool isGrounded;
+
+    //Property
+    public bool IsGrounded() => isGrounded;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,7 +28,20 @@ public class PlayerMovement : MonoBehaviour, IMovement, IJump
             isGrounded = false;
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
 
-    public bool IsGrounded() => isGrounded;
 
 }

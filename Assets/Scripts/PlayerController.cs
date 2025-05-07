@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, IEntity
     private IJump jump;
     private StateMachine stateMachine;
     
+    // Property
     public IPlayerInput Input => input;
     public IMovement Movement => movement;
     public IJump Jump => jump;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour, IEntity
     {
         input = GetComponent<IPlayerInput>();
         movement = GetComponent<IMovement>();
+        jump = GetComponent<IJump>();
 
         stateMachine = new StateMachine(this);
         if (input == null || movement == null)
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour, IEntity
     void Update()
     {
         stateMachine.Update();
+        Debug.Log($"Current state {stateMachine.CurrentState.GetType().Name}");
     }
      void FixedUpdate()
     {

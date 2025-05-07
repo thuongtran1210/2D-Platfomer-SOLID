@@ -10,12 +10,13 @@ public class PlayerRunState : IState
 
     public void Exit(IEntity entity)
     {
-    }
+    }   
 
     public void FixedUpdate(IEntity entity)
     {
         if (entity is PlayerController player)
         {
+            //them config moveSpeed sau
             player.Movement.Move(player.Input.HorizontalInput, 5f);
         }
     }
@@ -31,7 +32,7 @@ public class PlayerRunState : IState
 
             if (player.Input.JumpPressed)
             {
-                //player.StateMachine.ChangeState(new PlayerJumpState());
+                player.StateMachine.ChangeState(new PlayerJumpState());
             }
         }
     }

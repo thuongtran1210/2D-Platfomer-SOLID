@@ -6,7 +6,8 @@ public class PlayerIdleState : IState
 {
     public void Enter(IEntity entity)
     {
-        Debug.Log("Idle");
+      
+      
     }
 
     public void Exit(IEntity entity)
@@ -31,7 +32,7 @@ public class PlayerIdleState : IState
             }
             if (player.Input.JumpPressed)
             {
-                //player.StateMachine.ChangeState(new PlayerJumpState());
+                player.StateMachine.ChangeState(new PlayerJumpState());
             }
         }
     }
