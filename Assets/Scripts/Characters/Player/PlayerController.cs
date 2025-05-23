@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(PlayerInput), typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerInput), typeof(PlayerMovement),typeof(PlayerHealth))]
 public class PlayerController : MonoBehaviour, IEntity
 {
     [Header("Component references")]
@@ -24,10 +24,11 @@ public class PlayerController : MonoBehaviour, IEntity
     {
         input = GetComponent<IPlayerInput>();
         movement = GetComponent<IMovement>();
+        damageable = GetComponent<IDamageable>();
         jump = GetComponent<IJump>();
 
         stateMachine = new StateMachine(this);
-        if (input == null || movement == null)
+        if (input == null || movement == null || damageable == null)
         {
             Debug.LogError("Missing component requiment PlayerController!");
             enabled = false;
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour, IEntity
     {
         stateMachine.Update();
         Debug.Log($"Current state {stateMachine.CurrentState.GetType().Name}");
+
+
     }
      void FixedUpdate()
     {

@@ -6,9 +6,3 @@ public interface IState
     void FixedUpdate(IEntity entity);
     void Exit(IEntity entity);
 }
-public interface IEntity
-{
-    IMovement Movement { get; }
-    IJump Jump { get; }
-    IDamageable Damageable { get; }
-}

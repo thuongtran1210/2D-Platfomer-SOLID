@@ -2,6 +2,9 @@ public class StateMachine
 {
     private IState currentState;
     private IEntity entity; 
+    //Entity la cac thuc the co State
+    // + Character
+    // + Enemy
     public StateMachine(IEntity entity)
     {
         this.entity = entity;

@@ -17,7 +17,7 @@ public class PlayerRunState : IState
         if (entity is PlayerController player)
         {
             //them config moveSpeed sau
-            player.Movement.Move(player.Input.HorizontalInput, 5f);
+            player.Movement.Move(player.Input.HorizontalInput, 8f);
         }
     }
 
