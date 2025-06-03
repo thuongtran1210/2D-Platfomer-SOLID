@@ -7,8 +7,4 @@ public interface IJump
 {
     void Jump(float jumpForce);
 }
-public interface IDamageable
-{
-    void TakeDamage(float damage);
-    bool IsAlive {  get; }
-}
+
