@@ -27,18 +27,18 @@ public class PlayerRunState : IState
         {
             if (player.Input.HorizontalInput == 0)
             {
-                player.StateMachine.ChangeState(new PlayerIdleState());
+                player.StateMachine.ChangeState(player.IdleState);
                 return;
             }
 
             if (player.Input.JumpPressed)
             {
-                player.StateMachine.ChangeState(new PlayerJumpState());
+                player.StateMachine.ChangeState(player.JumpState);
                 return ;
             }
             if (player.Input.AttackPressed)
             {
-                player.StateMachine.ChangeState(new PlayerAttackState());
+                player.StateMachine.ChangeState(player.AttackState);
                 return;
             }
 

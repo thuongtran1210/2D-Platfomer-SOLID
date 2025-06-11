@@ -25,34 +25,34 @@ public class PlayerIdleState : IState
 
         if (player.Input.AttackPressed) 
         {
-            player.StateMachine.ChangeState(new PlayerAttackState());
+            player.StateMachine.ChangeState(player.AttackState);
             return;
         }
 
         if (player.Input.Skill1Pressed) 
         {
-            player.StateMachine.ChangeState(new PlayerSkillState(0));
+            player.StateMachine.ChangeState(player.SkillState0);
             return;
         }
         if (player.Input.Skill2Pressed) 
         {
-            player.StateMachine.ChangeState(new PlayerSkillState(1));
+            player.StateMachine.ChangeState(player.SkillState1);
             return;
         }
         if (player.Input.Skill3Pressed) 
         {
-            player.StateMachine.ChangeState(new PlayerSkillState(2));
+            player.StateMachine.ChangeState(player.SkillState2);
             return;
         }
 
 
         if (player.Input.HorizontalInput != 0)
         {
-            player.StateMachine.ChangeState(new PlayerRunState());
+            player.StateMachine.ChangeState(player.RunState);
         }
         if (player.Input.JumpPressed)
         {
-            player.StateMachine.ChangeState(new PlayerJumpState());
+            player.StateMachine.ChangeState(player.JumpState);
         }
     }
 }

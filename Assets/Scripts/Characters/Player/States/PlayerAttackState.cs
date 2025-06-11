@@ -36,7 +36,7 @@ public class PlayerAttackState : IState
 
         if (attackTimer <= 0)
         {
-            player.StateMachine.ChangeState(new PlayerIdleState());
+            player.StateMachine.ChangeState(player.IdleState);
         }
     }
 }

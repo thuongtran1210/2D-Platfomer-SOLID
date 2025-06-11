@@ -28,7 +28,7 @@ public class PlayerSkillState : IState
         else
         {
             Debug.Log($"Skill {skillIndex + 1} not ready, returning to Idle.");
-            player.StateMachine.ChangeState(new PlayerIdleState()); 
+            player.StateMachine.ChangeState(player.IdleState); 
         }
     }
 
@@ -51,7 +51,7 @@ public class PlayerSkillState : IState
 
         if (skillTimer <= 0)
         {
-            player.StateMachine.ChangeState(new PlayerIdleState());
+            player.StateMachine.ChangeState(player.IdleState);
         }
     }
 

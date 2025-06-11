@@ -27,7 +27,7 @@ public class PlayerJumpState : IState
     {
         if (entity is PlayerController player)
         {
-            player.StateMachine.ChangeState(new PlayerIdleState());
+            player.StateMachine.ChangeState(player.IdleState);
         }
     }
 }
