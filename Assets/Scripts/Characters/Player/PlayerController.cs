@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerInput), typeof(PlayerMovement),typeof(PlayerHealth))]
+
+
 public class PlayerController : MonoBehaviour, IEntity
 {
     [Header("Component references")]
@@ -12,13 +14,19 @@ public class PlayerController : MonoBehaviour, IEntity
     private IHealable healable;
     private StateMachine stateMachine;
     private Transform _transform;
-    
+    private IAttackable attackable;
+
+    private PlayerSkillManager skillManager;
+
     // Property
     public IPlayerInput Input => input;
     public IMovement Movement => movement;
     public IJump Jump => jump;
     public IDamageable Damageable => damageable;
     public IHealable Healable => healable;
+    public IAttackable Attackable => attackable;
+
+    public PlayerSkillManager SkillManager => skillManager;
     public StateMachine StateMachine => stateMachine;
     public Transform EntityTransform => _transform;
 
@@ -33,10 +41,14 @@ public class PlayerController : MonoBehaviour, IEntity
         damageable = GetComponent<IDamageable>();
         jump = GetComponent<IJump>();
         healable = GetComponent<IHealable>();
+        attackable = GetComponent<IAttackable>();
+
+        skillManager = GetComponent<PlayerSkillManager>();
+
         _transform = transform;
 
         stateMachine = new StateMachine(this);
-        if (input == null || movement == null || damageable == null || healable == null)
+        if (input == null || movement == null || damageable == null || healable == null || attackable == null)
         {
             Debug.LogError("Missing component requiment PlayerController!");
             enabled = false;

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerMeleeAttack))]
+[RequireComponent(typeof(PlayerSkillManager))]
 public class PlayerAttack : MonoBehaviour, IAttackable
 {
     private IMeleeAttack meleeAttacker;
       
     public enum AttackType { Melee, Ranged }
     [SerializeField] private AttackType currentAttackType = AttackType.Melee;
+    private PlayerSkillManager skillManager;
     private void Awake()
     {
         meleeAttacker = GetComponent<IMeleeAttack>();
@@ -18,10 +20,7 @@ public class PlayerAttack : MonoBehaviour, IAttackable
             enabled = false;
         }
     }
-    public bool IsSkillReady(int skillIndex)
-    {
-        throw new System.NotImplementedException();
-    }
+
 
     public void PerformAttack()
     {
@@ -37,11 +36,4 @@ public class PlayerAttack : MonoBehaviour, IAttackable
             }
         }
     }
-
-    public void PerformSkill(int skillIndex)
-    {
-        throw new System.NotImplementedException();
-    }
-
-
 }

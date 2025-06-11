@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (!IsAlive)
         {
-            Debug.Log("Play died!");
+            Debug.Log("Enemy died!");
 
         }
     }

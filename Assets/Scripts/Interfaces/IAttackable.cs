@@ -9,15 +9,4 @@ public interface IAttackable
     /// </summary>
     void PerformAttack();
 
-    /// <summary>
-    /// Use skill with skillIndex (0, 1, 2).
-    /// </summary>
-    /// <param name="skillIndex">Index skill (0, 1, 2).</param>
-    void PerformSkill(int skillIndex);
-
-    /// <summary>
-    /// Check skill ready.
-    /// </summary>
-    /// <param name="skillIndex">Index skill.</param>
-    bool IsSkillReady(int skillIndex);
 }

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f72daae0143f3b842a8052c1df794136, type: 3}
-  m_Name: MeleeCombat
+  m_Name: InvisibilityCombat
   m_EditorClassIdentifier: 
-  skillId: 0
-  skillName: MeleeCombat
-  description: dfadasdasasdasd
+  skillId: 2
+  skillName: Invisibility
+  description: 
   cooldownTime: 3
   icon: {fileID: 0}

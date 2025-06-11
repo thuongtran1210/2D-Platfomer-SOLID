@@ -20,20 +20,39 @@ public class PlayerIdleState : IState
 
     public void Update(IEntity entity)
     {
-        if (entity is PlayerController player)
+        PlayerController player = entity as PlayerController;
+        if (player == null) return;
+
+        if (player.Input.AttackPressed) 
         {
-            if (player.Input.HorizontalInput != 0)
-            {
-                player.StateMachine.ChangeState(new PlayerRunState());
-            }
-            else
-            {
-                player.Movement.Move(0, 0);
-            }
-            if (player.Input.JumpPressed)
-            {
-                player.StateMachine.ChangeState(new PlayerJumpState());
-            }
+            player.StateMachine.ChangeState(new PlayerAttackState());
+            return;
+        }
+
+        if (player.Input.Skill1Pressed) 
+        {
+            player.StateMachine.ChangeState(new PlayerSkillState(0));
+            return;
+        }
+        if (player.Input.Skill2Pressed) 
+        {
+            player.StateMachine.ChangeState(new PlayerSkillState(1));
+            return;
+        }
+        if (player.Input.Skill3Pressed) 
+        {
+            player.StateMachine.ChangeState(new PlayerSkillState(2));
+            return;
+        }
+
+
+        if (player.Input.HorizontalInput != 0)
+        {
+            player.StateMachine.ChangeState(new PlayerRunState());
+        }
+        if (player.Input.JumpPressed)
+        {
+            player.StateMachine.ChangeState(new PlayerJumpState());
         }
     }
 }

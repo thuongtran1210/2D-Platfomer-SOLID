@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class PlayerSkillManager : MonoBehaviour
     void Awake()
     {
             _activeSkills = new Dictionary<int, ISkill>();
-            _playerEntity = GetComponent<IEntity>(); // L?y tham chi?u ??n IEntity c?a PlayerController
+            _playerEntity = GetComponent<IEntity>(); 
 
             if (_playerEntity == null)
             {
@@ -24,8 +24,6 @@ public class PlayerSkillManager : MonoBehaviour
                 return;
             }
 
-            // Kh?i t?o c�c k? n?ng v?i SkillData t??ng ?ng
-            // Skill Index (key trong Dictionary) c� th? tr�ng v?i SkillId ho?c l� m?t ch? s? slot
 
             InitializeSkill(0, healSkillData, new HealSkill(healSkillData));
             InitializeSkill(1, aoeSkillData, new AoESkill(aoeSkillData));
@@ -39,11 +37,41 @@ public class PlayerSkillManager : MonoBehaviour
             return;
         }
 
-        skillInstance.SkillData = data; // G�n SkillData cho instance c?a skill
+        skillInstance.SkillData = data; 
         _activeSkills.Add(index, skillInstance);
         Debug.Log($"Skill {data.skillName} (ID: {data.skillId}) initialized for index {index}.");
     }
-
+    /// <summary>
+    /// Kiểm tra xem một kỹ năng có sẵn sàng không.
+    /// </summary>
+    /// <param name="skillIndex">Chỉ số của kỹ năng.</param>
+    /// <returns>True nếu kỹ năng sẵn sàng, ngược lại False.</returns>
+    public bool IsSkillReady(int skillIndex)
+    {
+        if (_activeSkills.TryGetValue(skillIndex, out ISkill skill))
+        {
+            return skill.CanUseSkill();
+        }
+        return false;
+    }
+    public void PerformSkill(int skillIndex)
+    {
+        if (_activeSkills.TryGetValue(skillIndex, out ISkill skill))
+        {
+            if (skill.CanUseSkill())
+            {
+                skill.PerformSkill(_playerEntity);
+            }
+            else
+            {
+                Debug.LogWarning($"Skill {skillIndex} is not ready or cannot be used.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Skill with index {skillIndex} not found.");
+        }
+    }
 
     // Update is called once per frame
     void Update()

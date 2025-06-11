@@ -22,7 +22,6 @@ public class PlayerMeleeAttack : MonoBehaviour, IMeleeAttack
             if (damageable != null && damageable.IsAlive)
             {
                 damageable.TakeDamage(meleeDamage);
-                Debug.Log($"Dealt {meleeDamage} melee damage to {enemyCollider.name}.");
             }
         }
     }
