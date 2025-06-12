@@ -99,5 +99,6 @@ public class PlayerController : MonoBehaviour, IEntity
      void FixedUpdate()
     {
         stateMachine.FixedUpdate();
+        (input as PlayerInput)?.ResetPressState();
     }
 }
