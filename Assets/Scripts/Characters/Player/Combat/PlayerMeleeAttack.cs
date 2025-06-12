@@ -8,11 +8,13 @@ public class PlayerMeleeAttack : MonoBehaviour, IMeleeAttack
     [SerializeField] private float meleeDamage = 20f;
     [SerializeField] private float attackRange = 1.5f; 
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Transform attackPoint;
+
     public void ExecuteMeleeAttack()
     {
         //  animation Meelee
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
-            transform.position
+            attackPoint.position
             + transform.right
             * (transform.localScale.x > 0 ? attackRange / 2 : -attackRange / 2)
             , attackRange / 2, enemyLayer); 
@@ -27,10 +29,10 @@ public class PlayerMeleeAttack : MonoBehaviour, IMeleeAttack
     }
     void OnDrawGizmosSelected()
     {
-        if (transform != null)
+        if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Vector3 attackOrigin = transform.position + transform.right * (transform.localScale.x > 0 ? attackRange / 2 : -attackRange / 2);
+            Vector3 attackOrigin = attackPoint.position + transform.right * (transform.localScale.x > 0 ? attackRange / 2 : -attackRange / 2);
             Gizmos.DrawWireSphere(attackOrigin, attackRange / 2);
         }
     }
