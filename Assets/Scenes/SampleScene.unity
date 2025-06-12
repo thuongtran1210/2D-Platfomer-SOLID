@@ -559,9 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569df8fbe6f461848b7bf4d616a648f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healSkillData: {fileID: 11400000, guid: fce50d71e7996d64fa53e1163c3807bb, type: 2}
-  aoeSkillData: {fileID: 11400000, guid: bf87baf2f98e5284ca312d5fac589e4d, type: 2}
-  invisibilitySkillData: {fileID: 11400000, guid: 0a3d60fc238a7094790437af58d1645e, type: 2}
+  skillDataList:
+  - {fileID: 11400000, guid: bf87baf2f98e5284ca312d5fac589e4d, type: 2}
+  - {fileID: 11400000, guid: fce50d71e7996d64fa53e1163c3807bb, type: 2}
+  - {fileID: 11400000, guid: 0a3d60fc238a7094790437af58d1645e, type: 2}
 --- !u!114 &826634387
 MonoBehaviour:
   m_ObjectHideFlags: 0

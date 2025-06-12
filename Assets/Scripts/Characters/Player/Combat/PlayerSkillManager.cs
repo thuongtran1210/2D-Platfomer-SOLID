@@ -5,30 +5,42 @@ using UnityEngine;
 public class PlayerSkillManager : MonoBehaviour
 {
     [Header("Skill Configuration")]
-    [SerializeField] private SkillData healSkillData;
-    [SerializeField] private SkillData aoeSkillData;
-    [SerializeField] private SkillData invisibilitySkillData;
+    [SerializeField] private List<SkillData> skillDataList = new List<SkillData>();
 
     private Dictionary<int, ISkill> _activeSkills; 
     private IEntity _playerEntity; 
     // Start is called before the first frame update
     void Awake()
     {
-            _activeSkills = new Dictionary<int, ISkill>();
-            _playerEntity = GetComponent<IEntity>(); 
+        _activeSkills = new Dictionary<int, ISkill>();
+        _playerEntity = GetComponent<IEntity>(); 
 
-            if (_playerEntity == null)
-            {
-                Debug.LogError("PlayerSkillManager requires an IEntity component on the same GameObject!");
-                enabled = false;
-                return;
-            }
+        if (_playerEntity == null)
+        {
+            Debug.LogError("PlayerSkillManager requires an IEntity component on the same GameObject!");
+            enabled = false;
+            return;
+        }
 
-
-            InitializeSkill(0, healSkillData, new HealSkill(healSkillData));
-            InitializeSkill(1, aoeSkillData, new AoESkill(aoeSkillData));
-            InitializeSkill(2, invisibilitySkillData, new InvisibilitySkill(invisibilitySkillData));
+        InitializeSkills();
     }
+
+    private void InitializeSkills()
+    {
+        for (int i = 0; i < skillDataList.Count; i++)
+        {
+            var skillData = skillDataList[i];
+            if (skillData != null)
+            {
+                var skill = SkillFactory.CreateSkill(skillData);
+                if (skill != null)
+                {
+                    InitializeSkill(i, skillData, skill);
+                }
+            }
+        }
+    }
+
     private void InitializeSkill(int index, SkillData data, ISkill skillInstance)
     {
         if (data == null)
