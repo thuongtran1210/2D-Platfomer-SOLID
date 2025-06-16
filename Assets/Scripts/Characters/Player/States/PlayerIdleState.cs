@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class PlayerIdleState : IState
 {
+    
+    private readonly AnimationManager _animationManager;
+    public PlayerIdleState(AnimationManager animationManager)
+    {
+        _animationManager = animationManager;
+    }
     public void Enter(IEntity entity)
     {
+        if (entity is PlayerController player)
+        {
+            _animationManager.PlayAnimationForState(this);
+        }
       
       
     }

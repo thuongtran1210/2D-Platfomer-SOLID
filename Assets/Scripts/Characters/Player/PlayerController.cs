@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IEntity
     private Transform _transform;
     private IAttackable attackable;
 
+
     private PlayerSkillManager skillManager;
 
     // State instance
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour, IEntity
     private PlayerSkillState skillState0;
     private PlayerSkillState skillState1;
     private PlayerSkillState skillState2;
+    // Anmation 
+    private AnimationManager animationManager;
 
     // Property
     public IPlayerInput Input => input;
@@ -52,6 +55,7 @@ public class PlayerController : MonoBehaviour, IEntity
 
 
 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,14 +66,17 @@ public class PlayerController : MonoBehaviour, IEntity
         healable = GetComponent<IHealable>();
         attackable = GetComponent<IAttackable>();
 
+
         skillManager = GetComponent<PlayerSkillManager>();
 
         _transform = transform;
 
-        // 
+        // State 
         stateMachine = new StateMachine(this);
-
-        idleState = new PlayerIdleState();
+        // Animation 
+        animationManager = new AnimationManager(GetComponent<Animator>());
+       
+        idleState = new PlayerIdleState(animationManager);
         runState = new PlayerRunState();
         jumpState = new PlayerJumpState();
         attackState = new PlayerAttackState();
@@ -79,7 +86,7 @@ public class PlayerController : MonoBehaviour, IEntity
         skillState2 = new PlayerSkillState(2);
 
 
-        if (input == null || movement == null || damageable == null || healable == null || attackable == null)
+        if ( input == null || movement == null || damageable == null || healable == null || attackable == null)
         {
             Debug.LogError("Missing component requiment PlayerController!");
             enabled = false;
