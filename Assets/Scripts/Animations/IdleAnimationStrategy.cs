@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleAnimationStrategy : IAnimationStrategy
+public class IdleAnimationStrategy : BaseAnimationStrategy
 {
-    private static readonly int IdleHash = Animator.StringToHash("Idle");
+    private static readonly int IdleHash = Animator.StringToHash("IsIdle");
 
-    public void Play(Animator animator)
+    public IdleAnimationStrategy() : base("Idle", 0f)
     {
-        animator.SetBool("IsIdle", true);
     }
 
-    public void Stop(Animator animator)
+    public override void Play(Animator animator)
     {
-        animator.SetBool("IsIdle", false);
+        base.Play(animator);
+        animator.SetBool(IdleHash, true);
+    }
+
+    public override void Stop(Animator animator)
+    {
+        base.Stop(animator);
+        animator.SetBool(IdleHash, false);
     }
 
 }

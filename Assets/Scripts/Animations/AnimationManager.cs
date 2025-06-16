@@ -21,15 +21,26 @@ public class AnimationManager
         _strategies = new Dictionary<Type, IAnimationStrategy>()
         {
             { typeof(PlayerIdleState), new IdleAnimationStrategy() },
-            { typeof(PlayerRunState), new RunAnimationStrategy() }
+            { typeof(PlayerRunState), new RunAnimationStrategy() },
+            { typeof(PlayerJumpState), new JumpAnimationStrategy() },
+            { typeof(PlayerAttackState), new AttackAnimationStrategy() }
+
         };
     }
     public void PlayAnimationForState(IState state)
     {
-        if (_strategies.TryGetValue(state.GetType(), out var strategy))
+        if (_animator == null) return;
+        if (state is PlayerSkillState skillState)
         {
+            var strategy = new SkillAnimationStrategy(skillState.SkillIndex);
             strategy.Play(_animator);
         }
+        else if (_strategies.TryGetValue(state.GetType(), out var strategy))
+        {
+            strategy.Play(_animator);
+          
+        }
+        OnAnimationStarted?.Invoke(state.GetType().Name);
     }
     public void StopAnimationForState(IState state)
     {
@@ -37,7 +48,6 @@ public class AnimationManager
         {
             strategy.Stop(_animator);
         }
+        OnAnimationCompleted?.Invoke(state.GetType().Name);
     }
-
-
 }

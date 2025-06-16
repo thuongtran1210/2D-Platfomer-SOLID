@@ -6,6 +6,11 @@ public class PlayerAttackState : IState
 {
     private float attackDuration = 0.2f; // animation attack
     private float attackTimer;
+    private readonly AnimationManager _animationManager;
+    public PlayerAttackState(AnimationManager animationManager)
+    {
+        _animationManager = animationManager;   
+    }
     public void Enter(IEntity entity)
     {
         PlayerController player = entity as PlayerController;
@@ -14,6 +19,7 @@ public class PlayerAttackState : IState
 
         player.Attackable.PerformAttack(); 
         attackTimer = attackDuration;
+        _animationManager.PlayAnimationForState(this);
         
     }
 
@@ -37,6 +43,7 @@ public class PlayerAttackState : IState
         if (attackTimer <= 0)
         {
             player.StateMachine.ChangeState(player.IdleState);
+
         }
     }
 }

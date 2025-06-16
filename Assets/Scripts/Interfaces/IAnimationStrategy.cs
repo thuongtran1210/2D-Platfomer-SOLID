@@ -6,5 +6,7 @@ public interface IAnimationStrategy
 {
     void Play(Animator animator);
     void Stop(Animator animator);
+    bool IsPlaying { get; }
+    float Duration { get; }
 
 }

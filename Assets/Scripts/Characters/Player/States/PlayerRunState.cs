@@ -1,11 +1,21 @@
 
 using System.Diagnostics;
+using UnityEngine;
 
 public class PlayerRunState : IState
 {
+    private readonly AnimationManager _animationManager;
+    private float speed = 8f;
+    public PlayerRunState(AnimationManager animationManager)
+    {
+        _animationManager = animationManager;
+    }
     public void Enter(IEntity entity)
     {
-        
+        if (entity is PlayerController player)
+        {
+            _animationManager.PlayAnimationForState(this);
+        }
     }
 
     public void Exit(IEntity entity)
@@ -17,7 +27,7 @@ public class PlayerRunState : IState
         if (entity is PlayerController player)
         {
             //them config moveSpeed sau
-            player.Movement.Move(player.Input.HorizontalInput, 8f);
+            player.Movement.Move(player.Input.HorizontalInput, speed);
         }
     }
 
@@ -25,6 +35,8 @@ public class PlayerRunState : IState
     {
         if (entity is PlayerController player)
         {
+            player.AnimationManager.PlayAnimationForState(this);
+            
             if (player.Input.HorizontalInput == 0)
             {
                 player.StateMachine.ChangeState(player.IdleState);

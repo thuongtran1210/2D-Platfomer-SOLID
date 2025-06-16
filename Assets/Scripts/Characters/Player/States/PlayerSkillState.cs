@@ -7,6 +7,8 @@ public class PlayerSkillState : IState
     private int skillIndex;
     private float skillAnimationDuration = 1.0f; 
     private float skillTimer;
+
+    public int SkillIndex => skillIndex;
     public PlayerSkillState(int index)
     {
         this.skillIndex = index;

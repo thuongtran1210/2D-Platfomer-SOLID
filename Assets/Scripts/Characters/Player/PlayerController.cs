@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, IEntity
     private PlayerSkillState skillState1;
     private PlayerSkillState skillState2;
     // Anmation 
-    private AnimationManager animationManager;
+    private AnimationManager _animationManager;
 
     // Property
     public IPlayerInput Input => input;
@@ -53,7 +53,8 @@ public class PlayerController : MonoBehaviour, IEntity
     public PlayerSkillState SkillState1 => skillState1;
     public PlayerSkillState SkillState2 => skillState2;
 
-
+    // Property Animation Strategy
+    public AnimationManager AnimationManager => _animationManager;
 
 
     // Start is called before the first frame update
@@ -74,12 +75,12 @@ public class PlayerController : MonoBehaviour, IEntity
         // State 
         stateMachine = new StateMachine(this);
         // Animation 
-        animationManager = new AnimationManager(GetComponent<Animator>());
+        _animationManager = new AnimationManager(GetComponent<Animator>());
        
-        idleState = new PlayerIdleState(animationManager);
-        runState = new PlayerRunState();
+        idleState = new PlayerIdleState(_animationManager);
+        runState = new PlayerRunState(_animationManager);
         jumpState = new PlayerJumpState();
-        attackState = new PlayerAttackState();
+        attackState = new PlayerAttackState(_animationManager);
 
         skillState0 = new PlayerSkillState(0);
         skillState1 = new PlayerSkillState(1);
