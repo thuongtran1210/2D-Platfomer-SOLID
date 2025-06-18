@@ -9,7 +9,7 @@ public class RunAnimationStrategy : BaseAnimationStrategy
     private static readonly int DirectionHash = Animator.StringToHash("Direction");
 
 
-    public RunAnimationStrategy() : base("Run", 0f) // Duration = 0 vì là animation loop
+    public RunAnimationStrategy() : base("Run", 0f) // Duration = 0  animation loop
     {
     }
 

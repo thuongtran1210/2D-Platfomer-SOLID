@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour, IEntity
        
         idleState = new PlayerIdleState(_animationManager);
         runState = new PlayerRunState(_animationManager);
-        jumpState = new PlayerJumpState();
+        jumpState = new PlayerJumpState(_animationManager, this);
         attackState = new PlayerAttackState(_animationManager);
 
         skillState0 = new PlayerSkillState(0);

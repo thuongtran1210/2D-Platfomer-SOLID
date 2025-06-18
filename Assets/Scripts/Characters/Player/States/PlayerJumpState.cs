@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerJumpState : IState
 {
+    private readonly JumpAnimationStrategy _jumpAnimationStrategy;
+    private float _jumpVelociy;
+    public PlayerJumpState(AnimationManager animationManager, PlayerController play) 
+    {
+
+    }
     public void Enter(IEntity entity)
     {
         if (entity is PlayerController player)
